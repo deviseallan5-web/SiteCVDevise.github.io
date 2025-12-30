@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Allan Devise</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Polices -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icônes -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* --- GLOBAL --- */
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* --- PALETTE --- */
+        :root {
+            --dark-blue: #375a6c;   /* Sidebar / Textes foncés */
+            --mid-blue: #6398a6;    /* Header / Titres / Lignes / Icônes harmonisées */
+            --light-blue: #5eaab3;  /* Accents */
+            --cyan: #5ce1e6;        /* Puces sidebar / Détails vifs / Bleu Fluo */
+            --grey-bg: #f6f6f6;
+        }
+
+        body {
+            background-color: #525659;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+        }
+
+        /* Feuille A4 */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background-color: white;
+            display: flex;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            padding-left: 30px; 
+        }
+
+        /* --- SIDEBAR (Gauche) --- */
+        .sidebar {
+            width: 33%;
+            background-color: var(--dark-blue);
+            color: white;
+            /* ALIGNEMENT : 12px de padding bas pour le Portfolio */
+            padding: 0 25px 12px 25px; 
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        .sidebar-top-spacer {
+            height: 60px;
+            background-color: var(--dark-blue); 
+            margin: 0 -25px;
+        }
+        
+        .top-sidebar-padding {
+            background-color: var(--dark-blue); 
+            height: 180px; 
+            margin: 0 -25px 0 -25px; 
+            padding: 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+        }
+        
+        .profile-pic-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+        }
+
+        .sidebar-group {
+            /* AJUSTEMENT : margin-bottom et padding-top à 12px pour toute la sidebar */
+            margin-bottom: 12px;
+            padding-top: 12px; 
+        }
+
+        .sidebar-group:first-of-type {
+            margin-top: 12px;
+        }
+
+        .sidebar-group:last-of-type {
+            margin-bottom: 0px !important;
+        }
+        
+        .sb-section-bar {
+            height: 5px; 
+            width: 200px; 
+            margin-bottom: 10px; 
+            margin-top: 12px;
+            /* MISE À JOUR : Blanc de 80px de large (soit 40% centré sur 200px -> 30% à 70%) */
+            background: linear-gradient(to right, 
+                var(--mid-blue) 0%, var(--mid-blue) 30%, 
+                white 30%, white 70%,                   
+                var(--mid-blue) 70%, var(--mid-blue) 100% 
+            );
+            border-radius: 4px;
+        }
+        
+        .sidebar-sep {
+            height: 3px;
+            width: 100%; 
+            background-color: white; 
+            margin-bottom: 15px; 
+        }
+
+        .sb-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 10px; /* AUGMENTÉ : de 5px à 10px */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .sb-text {
+            font-size: 0.935rem;
+            font-weight: 700;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .contact-icon {
+            color: var(--cyan);
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+        }
+
+        .skill-category {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: white;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.90rem; /* MODIFIÉ : de 0.85rem à 0.90rem */
+            font-weight: 300;
+        }
+
+        .skill-list li {
+            margin-bottom: 6px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .social-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+        }
+
+        .social-link-icon {
+            color: var(--cyan);
+            width: 24px;
+            height: 24px;
+            transition: transform 0.2s ease;
+        }
+
+        .social-link-icon:hover {
+            transform: scale(1.2);
+            color: white;
+        }
+        
+        /* --- MAIN CONTENT (Droite) --- */
+        .main {
+            width: 67%;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-white-bar {
+            height: 60px; 
+            width: 100%;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        .header {
+            background-color: var(--mid-blue);
+            color: white;
+            padding: 20px 40px; 
+            height: 180px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header-deco {
+            width: calc(100% + 40px);       
+            height: 3px;       
+            background-color: white;
+            margin-bottom: 20px; 
+            margin-right: -40px; 
+        }
+
+        .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            line-height: 0.9;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            letter-spacing: 1px;
+            opacity: 0.9;
+        }
+
+        .content-body {
+            padding: 30px 40px 15px 25px; 
+            flex-grow: 1;
+        }
+
+        .top-section-bar {
+            height: 5px;
+            width: 100%;
+            background: linear-gradient(to right, 
+                var(--dark-blue) 0%, var(--dark-blue) 12%, 
+                var(--light-blue) 12%, var(--light-blue) 88%, 
+                var(--dark-blue) 88%, var(--dark-blue) 100%
+            );
+            border-radius: 4px;
+            margin-bottom: 15px; 
+            margin-top: 0px; 
+        }
+
+        section {
+            margin-bottom: 55px !important; 
+        }
+
+        section:last-of-type {
+            margin-bottom: 0px !important;
+        }
+
+        .section-title {
+            color: var(--dark-blue);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-sep {
+            height: 1.5px;
+            width: 100%;
+            background-color: var(--mid-blue);
+            margin-bottom: 25px;
+        }
+
+        .formation-item {
+            margin-bottom: 20px;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .formation-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--mid-blue);
+            border-radius: 50%;
+        }
+
+        .formation-title {
+            font-weight: 900;
+            color: #6398a6;
+            font-size: 0.9rem;
+        }
+
+        .formation-details {
+            font-weight: 700;
+            color: #395a6b;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .formation-desc {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .exp-item {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: center; 
+        }
+
+        .exp-date-side {
+            width: 130px; 
+            flex-shrink: 0;
+            font-weight: 700;
+            color: var(--mid-blue);
+            font-size: 1rem; 
+            line-height: 1.2;
+            display: flex;
+            align-items: center; 
+            gap: 10px; 
+        }
+
+        .exp-icon {
+            color: var(--mid-blue); 
+            width: 42px; 
+            height: 42px;
+            min-width: 42px;
+            flex-shrink: 0;
+        }
+
+        .exp-content-side {
+            flex-grow: 1;
+            padding-left: 10px;
+        }
+
+        .exp-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.045rem; 
+            color: var(--dark-blue);
+        }
+
+        .exp-job-title {
+            color: var(--mid-blue);
+            font-weight: 700;
+            font-size: 0.95rem; 
+            margin-bottom: 3px;
+        }
+
+        .exp-company {
+            font-weight: 600;
+            color: var(--mid-blue); 
+            font-size: 0.95rem; 
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .exp-tasks {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.95rem; 
+            color: #555;
+        }
+
+        .exp-tasks li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 3px;
+        }
+
+        .exp-tasks li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--mid-blue);
+            font-weight: bold;
+        }
+
+        .interest-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .interest-item {
+            display: flex;
+            align-items: center; 
+            font-size: 0.95rem;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .interest-icon {
+            color: var(--mid-blue); 
+            width: 42px; 
+            height: 42px;
+            margin-right: 15px; 
+            flex-shrink: 0;
+        }
+
+        .footer-bar {
+            height: 30px; 
+            width: 100%;
+            background: linear-gradient(to right, var(--mid-blue) 0%, var(--dark-blue) 100%);
+            margin-top: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-top-spacer"></div>
+
+            <div class="top-sidebar-padding">
+                <div class="profile-pic-container">
+                    <img src="image.png" alt="Photo Allan" class="profile-pic">
+                </div>
+            </div>
+
+            <!-- A PROPOS -->
+            <div class="sidebar-group">
+                <!-- AJUSTEMENT : margin-top à 17px uniquement pour cette barre -->
+                <div class="sb-section-bar" style="margin-top: 17px;"></div>
+                <div class="sb-title-container">
+                    <h3 class="sb-title">A propos de moi</h3>
+                </div>
+                <p class="sb-text">
+                    Actuellement étudiant en Master CMI à la faculté des sciences de Béthune, je compte après obtention de celui-ci rentrer dans le monde de l'industrie afin d'y apporter ma vision.
+                </p>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="sidebar-group">
+                <div class="sb-section-bar"></div>
+                <h3 class="sb-title">Contact / Infos</h3>
+                <div class="sidebar-sep"></div>
+                
+                <div class="contact-item">
+                    <i data-lucide="mail" class="contact-icon"></i>
+                    <span>allan.devise@laposte.net</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="phone" class="contact-icon"></i>
+                    <span>06 76 09 05 87</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="map-pin" class="contact-icon"></i>
+                    <span>62940 - Haillicourt</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="car" class="contact-icon"></i>
+                    <span>Permis B . Véhiculé</span>
+                </div>
+                <div class="contact-item">
+                    <i data-lucide="calendar" class="contact-icon"></i>
+                    <span>5 janvier 2004</span>
+                </div>
+            </div>
+
+            <!-- COMPETENCES -->
+            <div class="sidebar-group">
+                <div class="sb-section-bar"></div>
+                <h3 class="sb-title">Compétences</h3>
+                <div class="sidebar-sep"></div>
+
+                <div class="skill-category">Hard skills :</div>
+                <ul class="skill-list">
+                    <li>Mécanique des fluides</li>
+                    <li>CAO (Inventor/Creo)</li>
+                    <li>FAO (Inventor/Creo)</li>
+                    <li>Métrologie (PCDMIS)</li>
+                    <li>Excel (macro)</li>
+                    <li>Gestion de maintenance</li>
+                </ul>
+
+                <div class="skill-category">Soft skills :</div>
+                <ul class="skill-list">
+                    <li>Lean management</li>
+                    <li>Gestion ligne de prod</li>
+                    <li>Anglais (niveau B2)</li>
+                    <li>Soif d'apprendre</li>
+                </ul>
+            </div>
+
+            <!-- RÉSEAUX -->
+            <div class="sidebar-group" style="margin-bottom: 0;">
+                <div class="sb-section-bar"></div>
+                <h3 class="sb-title">Réseaux</h3>
+                <div class="sidebar-sep"></div>
+
+                <div class="social-item">
+                    <span>Instagram</span>
+                    <a href="https://www.instagram.com/allan.studioo?igsh=amVhZWt2MWJhbXNl" target="_blank">
+                        <i data-lucide="instagram" class="social-link-icon"></i>
+                    </a>
+                </div>
+
+                <div class="social-item">
+                    <span>LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/allan-devise-a76a563a1/" target="_blank">
+                        <i data-lucide="linkedin" class="social-link-icon"></i>
+                    </a>
+                </div>
+
+                <div class="social-item" style="margin-bottom: 0;">
+                    <span>Portfolio</span>
+                    <a href="https://votre-portfolio.com" target="_blank">
+                        <i data-lucide="globe" class="social-link-icon"></i>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main">
+            <div class="top-white-bar"></div>
+
+            <header class="header">
+                <div class="header-deco"></div>
+                <h1 class="main-title">Allan<br>Devise</h1>
+                <p class="subtitle">RECHERCHE D'EMPLOI POST MASTER</p>
+            </header>
+
+            <div class="content-body">
+                
+                <!-- FORMATION -->
+                <section>
+                    <div class="top-section-bar"></div>
+                    <h2 class="section-title">Formation</h2>
+                    <div class="section-sep"></div>
+
+                    <div class="formation-item">
+                        <div class="formation-title">Master Conception Méthodes et Innovation</div>
+                        <div class="formation-details">2025-2027 / Faculté des sciences appliquées</div>
+                        <div class="formation-desc">Semestre 1 validé</div>
+                    </div>
+
+                    <div class="formation-item">
+                        <div class="formation-title">Bachelor Universitaire de Technologie en Génie Mécanique</div>
+                        <div class="formation-details">2022-2025 | Université de Béthune</div>
+                        <div class="formation-desc">Validation de toutes les compétences nécessaires.</div>
+                    </div>
+
+                    <div class="formation-item">
+                        <div class="formation-title">Baccalauréat STI2D Spécialité ITEC</div>
+                        <div class="formation-details">2019-2022 | Lycée Sadi Carnot</div>
+                        <div class="formation-desc">Obtention du Baccalauréat avec la mention "Bien"</div>
+                    </div>
+                </section>
+
+                <!-- EXPERIENCES PROFESSIONNELLES -->
+                <section>
+                    <div class="top-section-bar"></div>
+                    <h2 class="section-title">Expériences professionnelles</h2>
+                    <div class="section-sep"></div>
+
+                    <!-- Exp 1 - Aéronautique -->
+                    <div class="exp-item">
+                        <div class="exp-date-side">
+                            <i data-lucide="plane" class="exp-icon"></i>
+                            <span>2024<br>2025</span>
+                        </div>
+                        <div class="exp-content-side">
+                            <div class="exp-title">
+                                <span style="color: var(--mid-blue); font-weight: 400;">Alternance</span>
+                                <span style="color: var(--cyan); font-weight: 700;"> Mecachrome France</span>
+                            </div>
+                            <div class="exp-job-title">Chargé qualité / Industrialisation</div>
+                            <ul class="exp-tasks">
+                                <li>Gestion du secteur qualité</li>
+                                <li>Rigueur et environnement aéronautique</li>
+                                <li>Création de programme CN CATIA</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exp 2 - Agriculture -->
+                    <div class="exp-item">
+                        <div class="exp-date-side">
+                            <i data-lucide="wheat" class="exp-icon"></i>
+                            <span>été<br>2023/24</span>
+                        </div>
+                        <div class="exp-content-side">
+                            <div class="exp-title">
+                                <span style="color: var(--mid-blue); font-weight: 400;">Contrat CDD</span>
+                                <span style="color: var(--cyan); font-weight: 700;"> Coopérative Unéal</span>
+                            </div>
+                            <div class="exp-job-title">Agent polyvalent</div>
+                            <ul class="exp-tasks">
+                                <li>Conduite d'un engin télescopique</li>
+                                <li>Gestion d'une dalle de céréale</li>
+                                <li>Contact avec les agriculteurs</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exp 3 - Industrie/Soudure -->
+                    <div class="exp-item">
+                        <div class="exp-date-side">
+                            <i data-lucide="hammer" class="exp-icon"></i>
+                            <span>Hiver<br>2024</span>
+                        </div>
+                        <div class="exp-content-side">
+                            <div class="exp-title">
+                                <span style="color: var(--mid-blue); font-weight: 400;">Stage</span>
+                                <span style="color: var(--cyan); font-weight: 700;"> ETS Guilbar Vironchaux</span>
+                            </div>
+                            <div class="exp-job-title">Soudeur / Monteur</div>
+                            <ul class="exp-tasks">
+                                <li>Soudure au MIG</li>
+                                <li>Montage de matériel du sol</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- INTERETS -->
+                <section>
+                    <div class="top-section-bar"></div>
+                    <h2 class="section-title">Centres d'intérêt</h2>
+                    <div class="section-sep"></div>
+                    
+                    <div class="interest-list">
+                        <div class="interest-item">
+                            <i data-lucide="monitor" class="interest-icon"></i>
+                            <span>CCS/HTML (création de mon CV et Folio)</span>
+                        </div>
+                        <div class="interest-item">
+                            <i data-lucide="box" class="interest-icon"></i>
+                            <span>Modélisation 3D / Texturing (Utilisation de Logiciel 3D en autodidacte)</span>
+                        </div>
+                        <div class="interest-item">
+                            <i data-lucide="music" class="interest-icon"></i>
+                            <span>Musique/Concerts</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <div class="footer-bar"></div>
+        </main>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
